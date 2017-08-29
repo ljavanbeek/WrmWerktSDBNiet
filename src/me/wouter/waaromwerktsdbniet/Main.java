@@ -17,18 +17,6 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		getLogger().info("WaaromWerktSDBNiet v1.0 geladen.");
-		try {
-			getLogger().info("Getting server information..");
-			Thread.sleep(50);
-			getLogger().info("Getting Vault info...");
-			Thread.sleep(50);
-			getLogger().info("Getting Economy info...");
-			Thread.sleep(50);
-			getLogger().info("Getting WorldEdit info...");
-			Thread.sleep(50);
-			getLogger().info("Getting WorldGuard info...");
-		} catch (Exception ign) {
-		}
 		WereldData.getInstance().setup();
 	}
 
