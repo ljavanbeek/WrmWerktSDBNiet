@@ -1,0 +1,8 @@
+name: WaaromWerktSDBNiet
+version: 1.0
+description: Waarom werkt MinetopiaSDB niet? Vind het uit!
+main: me.wouter.waaromwerktsdbniet.Main
+commands:
+   waaromwerktsdbniet: 
+      description: Waarom werkt MinetopiaSDB niet? Type dit command om het probleem te vinden
+      aliases: [waarom, sdbfix, sdbfixer, wrmwerktsdbniet]
