@@ -83,10 +83,7 @@ public class Main extends JavaPlugin {
 
 			}
 		} else {
-
-			if (sender instanceof Player) {
-				clearPlayer(((Player) sender));
-			}
+			clearPlayer(sender);
 			sender.sendMessage(cc("&3-=-=[&bWaaromWerktSDBNiet&3]=-=-"));
 			sender.sendMessage(cc("&3Javaversie: " + getJava()));
 			sender.sendMessage(cc("&3Vault: " + getVault()));
@@ -172,7 +169,7 @@ public class Main extends JavaPlugin {
 		return cc("&cMinetopiaSDB is niet geinstalleerd!\n&cOm op te lossen /wrmwerktsdbniet MinetopiaSDB");
 	}
 
-	public void clearPlayer(Player p) {
+	public void clearPlayer(CommandSender p) {
 		int i = 0;
 		while (i < 200) {
 			p.sendMessage(" ");
