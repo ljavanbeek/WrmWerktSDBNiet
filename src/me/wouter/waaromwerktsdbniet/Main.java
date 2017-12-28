@@ -38,7 +38,8 @@ public class Main extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length != 0 && (args[0].equalsIgnoreCase("vault") || args[0].equalsIgnoreCase("economy")
 				|| args[0].equalsIgnoreCase("java") || args[0].equalsIgnoreCase("worldedit")
-				|| args[0].equalsIgnoreCase("worldguard")	 || args[0].equalsIgnoreCase("minetopiasdb"))) {
+					 || args[0].equalsIgnoreCase("lwc") 
+				|| args[0].equalsIgnoreCase("worldguard") || args[0].equalsIgnoreCase("minetopiasdb"))) {
 			if (sender instanceof Player) {
 				clearPlayer(((Player) sender));
 			}
