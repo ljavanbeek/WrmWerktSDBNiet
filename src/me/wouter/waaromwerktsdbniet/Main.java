@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.PluginManager;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -52,32 +53,36 @@ public class Main extends JavaPlugin {
 				break;
 			case "vault":
 				sender.sendMessage(cc("&3Zorg dat je de plugin &bVault &3geinstalleerd hebt. "));
-				sender.sendMessage(cc("&3Download: &bhttps://dev.bukkit.org/projects/vault"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/vault"));
 
 				sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 				break;
 			case "worldedit":
 				sender.sendMessage(cc("&3Bij zowel &bWorldEdit &3en &bWorldGuard is de versie belangrijk. "));
-				sender.sendMessage(cc("&3Download: &bhttp://MinetopiaSDB.nl/WorldGuardHulp.html"));
+				sender.sendMessage(cc("&3Download: &bhttp://MinetopiaSDB.nl/worldedit"));
 				sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 				break;
 			case "worldguard":
 				sender.sendMessage(cc("&3Bij zowel WorldEdit en WorldGuard is de versie belangrijk. "));
-				sender.sendMessage(cc("&3Download: &bhttp://MinetopiaSDB.nl/WorldGuardHulp.html"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/worldguard"));
 				sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 				break;
 			case "economy":
 				sender.sendMessage(cc("&3Zorg dat je de plugin &bVault &3geinstalleerd hebt. "));
-				sender.sendMessage(cc("&3Download: &bhttps://dev.bukkit.org/projects/vault"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/vault"));
 				sender.sendMessage(" ");
 				sender.sendMessage(cc("&3Zorg ook dat je de plugin &bEssentials &3geinstalleerd hebt. "));
 				sender.sendMessage(cc(
-						"&3Download: &bhttps://hub.spigotmc.org/jenkins/job/spigot-essentials/lastSuccessfulBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar"));
+						"&3Download: &bhttp://minetopiasdb.nl/essentials"));
 				sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 				break;
 			case "minetopiasdb":
 				sender.sendMessage(cc("&3Zorg dat je de plugin &bMinetopiaSDB &3geinstalleerd hebt. "));
-				sender.sendMessage(cc("&3Download: &bhttps://minetopiasdb.nl/"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/"));
+				break;
+			case "lwc":
+				sender.sendMessage(cc("&3Zorg dat je de plugin &bEntityLWC &3geinstalleerd hebt in plaats van de normale LWC!"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/lwc"));
 				break;
 			default:
 
@@ -90,6 +95,9 @@ public class Main extends JavaPlugin {
 			sender.sendMessage(cc("&3Vault economy hook: " + getEcon()));
 			sender.sendMessage(cc("&3WorldEdit: " + getWE()));
 			sender.sendMessage(cc("&3WorldGuard: " + getWG()));
+			if (Bukkit.getPluginManager().isPluginEnabled("LWC")) { 
+				sender.sendMessage(cc("&eLWC: " + getLWC()));
+			}
 			sender.sendMessage(cc("&3MinetopiaSDB: " + getSDB(sender)));
 			sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 		}
@@ -103,6 +111,8 @@ public class Main extends JavaPlugin {
 	public String getJava() {
 		if (System.getProperty("java.version").startsWith("1.8.")) {
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)");
+		}else if (System.getProperty("java.version").startsWith("1.9.") { 
+			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)&3. Toch problemen? Probeer Java 8!");
 		}
 		return cc("&cFoute versie! (&4" + System.getProperty("java.version")
 				+ "&4) \n&cOm op te lossen /wrmwerktsdbniet Java");
@@ -167,6 +177,15 @@ public class Main extends JavaPlugin {
 			}
 		}
 		return cc("&cMinetopiaSDB is niet geinstalleerd!\n&cOm op te lossen /wrmwerktsdbniet MinetopiaSDB");
+	}
+	
+	public String showLWC() {
+		PluginManager pm = Bukkit.getPluginManager();
+		if (!pm.getPlugin("LWC").getDescription().getAuthors().contains("Me_Goes_RAWR")) {
+			return cc("&eGoede versie! Problemen met WorldGuard? Verwijder het mapje 'libs' in plugins -> LWC");
+		} else {
+			return cc("&cFoute versie!\n&cOm op te lossen /wrmwerktsdbniet LWC");
+		}
 	}
 
 	public void clearPlayer(CommandSender p) {
