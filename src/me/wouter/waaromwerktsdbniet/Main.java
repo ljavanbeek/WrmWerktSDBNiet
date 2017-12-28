@@ -91,15 +91,15 @@ public class Main extends JavaPlugin {
 		} else {
 			clearPlayer(sender);
 			sender.sendMessage(cc("&3-=-=[&bWaaromWerktSDBNiet&3]=-=-"));
-			sender.sendMessage(cc("&3Javaversie: " + getJava()));
-			sender.sendMessage(cc("&3Vault: " + getVault()));
-			sender.sendMessage(cc("&3Vault economy hook: " + getEcon()));
-			sender.sendMessage(cc("&3WorldEdit: " + getWE()));
-			sender.sendMessage(cc("&3WorldGuard: " + getWG()));
+			sender.sendMessage(cc("&bJavaversie: " + getJava()));
+			sender.sendMessage(cc("&bVault: " + getVault()));
+			sender.sendMessage(cc("&bVault economy hook: " + getEcon()));
+			sender.sendMessage(cc("&bWorldEdit: " + getWE()));
+			sender.sendMessage(cc("&bWorldGuard: " + getWG()));
 			if (Bukkit.getPluginManager().isPluginEnabled("LWC")) { 
 				sender.sendMessage(cc("&eLWC: " + getLWC()));
 			}
-			sender.sendMessage(cc("&3MinetopiaSDB: " + getSDB(sender)));
+			sender.sendMessage(cc("&bMinetopiaSDB: " + getSDB(sender)));
 			sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 		}
 		return true;
@@ -112,7 +112,7 @@ public class Main extends JavaPlugin {
 	public String getJava() {
 		if (System.getProperty("java.version").startsWith("1.8.")) {
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)");
-		}else if (System.getProperty("java.version").startsWith("1.9.") { 
+		}else if (System.getProperty("java.version").startsWith("1.9.")) { 
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)&3. Toch problemen? Probeer Java 8!");
 		}
 		return cc("&cFoute versie! (&4" + System.getProperty("java.version")
@@ -180,9 +180,9 @@ public class Main extends JavaPlugin {
 		return cc("&cMinetopiaSDB is niet geinstalleerd!\n&cOm op te lossen /wrmwerktsdbniet MinetopiaSDB");
 	}
 	
-	public String showLWC() {
+	public String getLWC() {
 		PluginManager pm = Bukkit.getPluginManager();
-		if (!pm.getPlugin("LWC").getDescription().getAuthors().contains("Me_Goes_RAWR")) {
+		if (pm.getPlugin("LWC").getDescription().getAuthors().contains("Me_Goes_RAWR")) {
 			return cc("&eGoede versie! Problemen met WorldGuard? Verwijder het mapje 'libs' in plugins -> LWC");
 		} else {
 			return cc("&cFoute versie!\n&cOm op te lossen /wrmwerktsdbniet LWC");
