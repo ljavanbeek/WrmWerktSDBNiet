@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length != 0 && (args[0].equalsIgnoreCase("vault") || args[0].equalsIgnoreCase("economy")
 				|| args[0].equalsIgnoreCase("java") || args[0].equalsIgnoreCase("worldedit")
-					 || args[0].equalsIgnoreCase("lwc") 
+				|| args[0].equalsIgnoreCase("lwc") || args[0].equalsIgnoreCase("spigot")
 				|| args[0].equalsIgnoreCase("worldguard") || args[0].equalsIgnoreCase("minetopiasdb"))) {
 			if (sender instanceof Player) {
 				clearPlayer(((Player) sender));
@@ -73,8 +73,7 @@ public class Main extends JavaPlugin {
 				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/vault"));
 				sender.sendMessage(" ");
 				sender.sendMessage(cc("&3Zorg ook dat je de plugin &bEssentials &3geinstalleerd hebt. "));
-				sender.sendMessage(cc(
-						"&3Download: &bhttp://minetopiasdb.nl/essentials"));
+				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/essentials"));
 				sender.sendMessage(cc("&3Voor persoonlijke hulp join de discord &bhttp://minetopiasdb.nl/discord"));
 				break;
 			case "minetopiasdb":
@@ -82,8 +81,12 @@ public class Main extends JavaPlugin {
 				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/"));
 				break;
 			case "lwc":
-				sender.sendMessage(cc("&3Zorg dat je de plugin &bEntityLWC &3geinstalleerd hebt in plaats van de normale LWC!"));
+				sender.sendMessage(
+						cc("&3Zorg dat je de plugin &bEntityLWC &3geinstalleerd hebt in plaats van de normale LWC!"));
 				sender.sendMessage(cc("&3Download: &bhttp://minetopiasdb.nl/lwc"));
+				break;
+			case "spigot":
+				sender.sendMessage(cc("&3MinetopiaSDB vereist &bSpigot 1.9.4 &3of hoger!"));
 				break;
 			default:
 
@@ -91,12 +94,13 @@ public class Main extends JavaPlugin {
 		} else {
 			clearPlayer(sender);
 			sender.sendMessage(cc("&3-=-=[&bWaaromWerktSDBNiet&3]=-=-"));
+			sender.sendMessage(cc("&bServerVersie: " + getVersion()));
 			sender.sendMessage(cc("&bJavaversie: " + getJava()));
 			sender.sendMessage(cc("&bVault: " + getVault()));
 			sender.sendMessage(cc("&bVault economy hook: " + getEcon()));
 			sender.sendMessage(cc("&bWorldEdit: " + getWE()));
 			sender.sendMessage(cc("&bWorldGuard: " + getWG()));
-			if (Bukkit.getPluginManager().isPluginEnabled("LWC")) { 
+			if (Bukkit.getPluginManager().isPluginEnabled("LWC")) {
 				sender.sendMessage(cc("&eLWC: " + getLWC()));
 			}
 			sender.sendMessage(cc("&bMinetopiaSDB: " + getSDB(sender)));
@@ -109,11 +113,25 @@ public class Main extends JavaPlugin {
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
 
+	public String getVersion() {
+		if (!Bukkit.getVersion().toLowerCase().contains("spigot")) {
+			return cc("&cFoute versie! (&4" + Bukkit.getVersion() + "&4) \n&cOm op te lossen /wrmwerktsdbniet spigot");
+		} else if (Bukkit.getVersion().contains("1.8")) {
+			return cc("&cFoute versie! (&4" + Bukkit.getVersion() + "&4) \n&cOm op te lossen /wrmwerktsdbniet spigot");
+		} else {
+			return cc("&3Goede versie! &b(&3" + Bukkit.getVersion() + "&b)&3.");
+		}
+	}
+
 	public String getJava() {
 		if (System.getProperty("java.version").startsWith("1.8.")) {
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)");
-		}else if (System.getProperty("java.version").startsWith("1.9.")) { 
-			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version") + "&b)&3. Toch problemen? Probeer Java 8!");
+		} else if (System.getProperty("java.version").startsWith("1.9.")) {
+			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version")
+					+ "&b)&3. Toch problemen? Probeer Java 8!");
+		} else if (System.getProperty("java.version").startsWith("1.10.")) {
+			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version")
+					+ "&b)&3. Toch problemen? Probeer Java 8!");
 		}
 		return cc("&cFoute versie! (&4" + System.getProperty("java.version")
 				+ "&4) \n&cOm op te lossen /wrmwerktsdbniet Java");
@@ -155,8 +173,16 @@ public class Main extends JavaPlugin {
 	public String getWG() {
 		if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null
 				&& Bukkit.getPluginManager().getPlugin("WorldGuard").isEnabled()) {
-			return cc("&3Goede versie! &b(&3"
-					+ Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion() + "&b)");
+			String wgver = Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion();
+			if (wgver.contains("6.2") && !wgver.contains("6.2.1") && !Bukkit.getVersion().contains("1.12")) {
+				return cc("&3Goede versie! &b(&3"
+						+ Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion() + "&b)");
+			} else if (wgver.contains("6.2.1") && Bukkit.getVersion().contains("1.12")) {
+				return cc("&3Goede versie! &b(&3"
+						+ Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion() + "&b)");
+			} else {
+				return cc("&cMogelijk foute versie (" + Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion() + ") !\n&cOm op te lossen /wrmwerktsdbniet WorldGuard");
+			}
 		}
 		return cc("&cFoute versie of niet geinstalleerd!\n&cOm op te lossen /wrmwerktsdbniet WorldGuard");
 	}
@@ -179,7 +205,7 @@ public class Main extends JavaPlugin {
 		}
 		return cc("&cMinetopiaSDB is niet geinstalleerd!\n&cOm op te lossen /wrmwerktsdbniet MinetopiaSDB");
 	}
-	
+
 	public String getLWC() {
 		PluginManager pm = Bukkit.getPluginManager();
 		if (pm.getPlugin("LWC").getDescription().getAuthors().contains("Me_Goes_RAWR")) {
