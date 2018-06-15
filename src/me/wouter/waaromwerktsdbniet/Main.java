@@ -216,10 +216,8 @@ public class Main extends JavaPlugin {
 	}
 
 	public void clearPlayer(CommandSender p) {
-		int i = 0;
-		while (i < 200) {
+		for (int i=0;i < 200; i++) {
 			p.sendMessage(" ");
-			i++;
 		}
 	}
 }
