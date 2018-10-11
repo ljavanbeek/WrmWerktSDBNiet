@@ -17,7 +17,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		getLogger().info("WaaromWerktSDBNiet v1.0 geladen.");
+		getLogger().info("WaaromWerktSDBNiet v1.0.1 geladen.");
 		WereldData.getInstance().setup();
 	}
 
@@ -130,6 +130,9 @@ public class Main extends JavaPlugin {
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version")
 					+ "&b)&3. Toch problemen? Probeer Java 8!");
 		} else if (System.getProperty("java.version").startsWith("1.10.")) {
+			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version")
+					+ "&b)&3. Toch problemen? Probeer Java 8!");
+		} else if (System.getProperty("java.version").startsWith("1.11.")) {
 			return cc("&3Goede versie! &b(&3" + System.getProperty("java.version")
 					+ "&b)&3. Toch problemen? Probeer Java 8!");
 		}
