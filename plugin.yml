@@ -1,5 +1,5 @@
 name: WaaromWerktSDBNiet
-version: 1.1
+version: 1.1.1
 description: Waarom werkt MinetopiaSDB niet? Vind het uit!
 main: me.wouter.waaromwerktsdbniet.Main
 commands:
